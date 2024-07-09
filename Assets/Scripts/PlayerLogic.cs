@@ -1,3 +1,12 @@
+/*
+ * Is responible for all player actions. Movement, button actions, etc.
+ * Still a work in progress.
+ * Buttons probably need to be handled as Context action rather than boolean.
+ * 
+ * Source: https://www.youtube.com/watch?v=lclDl-NGUMg (part of the InputAction video)
+ * Old Source (Not Used): https://www.youtube.com/watch?v=ixM2W2tPn6c
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

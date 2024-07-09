@@ -1,3 +1,10 @@
+/*
+ * Moves the texture of an quad in a defined direction and speed.
+ * Does not actually move the object itself.
+ * 
+ * Ensure that the texture you're using has its wrap set to repeat.
+ * Source: https://www.youtube.com/watch?v=Wz3nbQPYwss
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

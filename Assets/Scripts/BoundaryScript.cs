@@ -1,3 +1,12 @@
+/*
+ * This script sets the boundary for a given object (intended for a player object) to the edges of the camera.
+ * Keep in mind, that the object might have some clipping issues when it reaches the edge of the screen.
+ * Implement an offset if you want to deal with it.
+ * 
+ * Source: https://www.youtube.com/watch?v=ailbszpt_AI
+ * 
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,11 @@
+/*
+ * This script handles player inputs provided by a Input Action script.
+ * I'm not great at explaining things so refer to the source for more details.
+ * 
+ * Source: https://www.youtube.com/watch?v=lclDl-NGUMg
+ * JoyStick Source: https://www.youtube.com/watch?v=zd75Jq37R60
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +13,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    [Header("Inpute Action Asset")]
+    // The set of actions defined by a InputActionAsset, which is essentially a collection of actions.
+    [Header("Input Action Asset")]
     [SerializeField] private InputActionAsset playerControls;
 
+    // Name of action map reference.
     [Header("Action Map Name References")]
     [SerializeField] private string actionMapName = "Player";
 
+    // Keys to find access actions.
     [Header("Action Name References")]
     [SerializeField] private string move = "Move";
     [SerializeField] private string missile = "Missile";
@@ -48,6 +59,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     }
 
+    /*
+     * Essentially waits for an input to be given.
+     * 
+     */
     void RegisterInputActions()
     {
         moveAction.performed += context => MoveInput = context.ReadValue<Vector2>();
@@ -60,6 +75,9 @@ public class PlayerInputHandler : MonoBehaviour
         autogunAction.canceled -= context => AutogunTriggered = false;
     }
 
+    /*
+     * OnEnable() and OnDisable() are needed for some reason. Dunno why but they are.
+     */
     private void OnEnable()
     {
         moveAction.Enable();
