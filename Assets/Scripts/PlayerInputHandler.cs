@@ -53,10 +53,9 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         moveAction = playerControls.FindActionMap(actionMapName).FindAction(move);
-        missileAction = playerControls.FindActionMap(actionMapName).FindAction(missile);
-        autogunAction = playerControls.FindActionMap(actionMapName).FindAction(autogun);
+        missileAction = playerControls.FindActionMap(actionMapName).FindAction(missile); // Q & LT
+        autogunAction = playerControls.FindActionMap(actionMapName).FindAction(autogun); // E & RT
         RegisterInputActions();
-
     }
 
     /*
@@ -68,11 +67,11 @@ public class PlayerInputHandler : MonoBehaviour
         moveAction.performed += context => MoveInput = context.ReadValue<Vector2>();
         moveAction.canceled += context => MoveInput = Vector2.zero;
 
-        missileAction.performed -= context => MissileTriggered = true;
-        missileAction.canceled -= context => MissileTriggered = false;
+        missileAction.performed += context => MissileTriggered = true;
+        missileAction.canceled += context => MissileTriggered = false;
 
-        autogunAction.performed -= context => AutogunTriggered = true;
-        autogunAction.canceled -= context => AutogunTriggered = false;
+        autogunAction.performed += context => MissileTriggered = true;
+        autogunAction.canceled += context => AutogunTriggered = false;
     }
 
     /*
@@ -80,6 +79,7 @@ public class PlayerInputHandler : MonoBehaviour
      */
     private void OnEnable()
     {
+        playerControls.Enable();
         moveAction.Enable();
         missileAction.Enable();
         autogunAction.Enable();
@@ -87,9 +87,15 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnDisable()
     {
+        playerControls.Disable();
         moveAction.Disable();
         missileAction.Disable();
         autogunAction.Disable();
+    }
+
+    private void TestInput()
+    {
+        Debug.Log("Testing");
     }
 
 }

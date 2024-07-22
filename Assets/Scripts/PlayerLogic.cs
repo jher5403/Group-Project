@@ -19,8 +19,8 @@ public class PlayerLogic : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     private float horizontalInput;
     private float verticalInput;
-    private bool fireMissile;
-    private bool fireAutogun;
+    private bool shouldMissile;
+    private bool shouldAutogun;
 
     private void Start()
     {
@@ -38,40 +38,41 @@ public class PlayerLogic : MonoBehaviour
         horizontalInput = inputHandler.MoveInput.x;
         verticalInput = inputHandler.MoveInput.y;
 
-        fireMissile = inputHandler.MissileTriggered && fireMissile;
-        fireAutogun = inputHandler.AutogunTriggered && fireAutogun;
+        shouldMissile = inputHandler.MissileTriggered;
+        shouldAutogun = inputHandler.AutogunTriggered;
     }
 
     private void FixedUpdate()
     {
         ApplyMovement();
-
-        if (fireMissile) 
-        { 
-            FireMissile(); 
-        }
-
-        if (fireAutogun) 
-        { 
-            FireAutogun(); 
-        }
+        FireMissile();
+        FireAutogun();
+        
     }
 
     void ApplyMovement()
     {
         rb.velocity = new Vector2 (horizontalInput * moveSpeed, verticalInput * moveSpeed);
-        Debug.Log("New Movement");
     }
 
+    /*
+     * fireMissile starts as false. Inputs do not change it. Perhaps I am going about this wrong.
+     */
     void FireMissile() // Q
     {
-        Debug.Log("Firing Missile!");
-        fireMissile = false;
+        if (shouldMissile == true) 
+        {
+            Debug.Log("Missile");
+            shouldMissile = false;
+        }
     }
 
     void FireAutogun() // E
     {
-        Debug.Log("Firing Autogun!");
-        fireAutogun = false;
+        if (shouldAutogun == true) 
+        {
+            Debug.Log("Autogun");
+            shouldAutogun = false;
+        }
     }
 }
