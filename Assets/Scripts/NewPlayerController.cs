@@ -5,16 +5,20 @@ using UnityEngine.InputSystem;
 
 /*
  * I've essentailly merged the PlayerLogic and PlayerInputHandler scripts together to get my button inputs to work.
- * This script is responsible for handling all the player actions. (currently just movement).
+ * This script is responsible for handling all the player actions including movement, and weapons.
  * The input map is auto generated.
  * 
  * New Source: https://www.youtube.com/watch?v=HmXU4dZbaMw
+ * Collision Logic Source: https://www.youtube.com/watch?v=Bc9lmHjqLZc
  */
 public class NewPlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public GameOverManager gameOverManager;
     private PlayerInputActions playerControls;
     [SerializeField] private float moveSpeed = 7f;
+    public Weapon autogun;
+    public Weapon missile;
 
     /*
      * These InputActions represent all the possible actions the player can take.
@@ -78,10 +82,20 @@ public class NewPlayerController : MonoBehaviour
 
     private void FireMissile(InputAction.CallbackContext context)
     {
-        Debug.Log("Fired Missile");
+        //Debug.Log("Fired Missile");
+
     }
     private void FireAutogun(InputAction.CallbackContext context)
     {
-        Debug.Log("Firing Autogun");
+        //Debug.Log("Firing Autogun");
+        autogun.Fire();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Struck");
+        gameOverManager.GameOver();
+        Destroy(gameObject);
+    }
+
 }
