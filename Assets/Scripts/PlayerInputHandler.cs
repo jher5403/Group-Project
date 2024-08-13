@@ -1,4 +1,5 @@
-/*
+/* 
+ * (DEPRECIATED)
  * This script handles player inputs provided by a Input Action script.
  * I'm not great at explaining things so refer to the source for more details.
  * 

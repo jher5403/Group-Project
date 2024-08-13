@@ -13,29 +13,38 @@ using UnityEngine.SceneManagement;
 public class GameOverManager : MonoBehaviour
 {
     public GameObject gameOverUI;
+    public GameObject gameWinUI;
+    private bool activeMenu = false;
 
-    void Start()
+    public void GameWin()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        if (!activeMenu)
+        {
+            Time.timeScale = 0;
+            gameWinUI.SetActive(true);
+            activeMenu = true;
+        }
     }
 
     public void GameOver() 
     {
-        gameOverUI.SetActive(true);
+        if (!activeMenu)
+        {
+            Time.timeScale = 0;
+            gameOverUI.SetActive(true);
+            activeMenu = true;
+        }
     }
 
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void MainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenuScene");
     }
 

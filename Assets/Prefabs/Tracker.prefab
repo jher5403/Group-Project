@@ -233,6 +233,7 @@ MonoBehaviour:
   platform: {fileID: 7811768502717447564}
   target: {fileID: 0}
   weapon: {fileID: 7123865127901632641}
+  missileSound: {fileID: 0}
 --- !u!1 &7811768502717447564
 GameObject:
   m_ObjectHideFlags: 0

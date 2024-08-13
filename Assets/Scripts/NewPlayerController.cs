@@ -8,17 +8,32 @@ using UnityEngine.InputSystem;
  * This script is responsible for handling all the player actions including movement, and weapons.
  * The input map is auto generated.
  * 
- * New Source: https://www.youtube.com/watch?v=HmXU4dZbaMw
+ * Input Source: https://www.youtube.com/watch?v=HmXU4dZbaMw
  * Collision Logic Source: https://www.youtube.com/watch?v=Bc9lmHjqLZc
+ * Jet Idle Loop Source: https://stackoverflow.com/a/59440819
  */
 public class NewPlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public GameOverManager gameOverManager;
     private PlayerInputActions playerControls;
-    [SerializeField] private float moveSpeed = 7f;
+
+    [SerializeField] 
+    private float moveSpeed = 7f;
+
+    [SerializeField]
+    private AudioClip missileSound;
+
+    [SerializeField]
+    private AudioClip autogunSound;
+
+    [SerializeField] 
+    private AudioClip jetIdle;
+
     public Weapon autogun;
     public Weapon missile;
+
+
 
     /*
      * These InputActions represent all the possible actions the player can take.
@@ -51,6 +66,7 @@ public class NewPlayerController : MonoBehaviour
     void Update()
     {
         MoveInput = moveAction.ReadValue<Vector2>();
+        //SoundEffectsManager.instance.PlaySound(jetIdle, transform, 0.3f);
     }
     void FixedUpdate()
     {
@@ -83,19 +99,38 @@ public class NewPlayerController : MonoBehaviour
     private void FireMissile(InputAction.CallbackContext context)
     {
         //Debug.Log("Fired Missile");
-
+        SoundEffectsManager.instance.PlaySound(missileSound, transform, 0.7f);
     }
     private void FireAutogun(InputAction.CallbackContext context)
     {
-        //Debug.Log("Firing Autogun");
-        autogun.Fire();
+        SoundEffectsManager.instance.PlaySound(autogunSound, transform, 0.7f);
+        //autogun.Fire();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Struck");
+        //Debug.Log("Struck");
+        StopCoroutine(LoopAudio());
+        AudioListener.pause = true;
         gameOverManager.GameOver();
         Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        AudioListener.pause = false;
+        StartCoroutine(LoopAudio());
+    }
+
+    IEnumerator LoopAudio()
+    {
+        float length = jetIdle.length;
+
+        while (true)
+        {
+            SoundEffectsManager.instance.PlaySound(jetIdle, transform, 0.3f);
+            yield return new WaitForSeconds(length);
+        }
     }
 
 }
