@@ -1,6 +1,7 @@
 /*
  * Moves the texture of an quad in a defined direction and speed.
  * Does not actually move the object itself.
+ * Can be used for parallaxing effect.
  * 
  * Ensure that the texture you're using has its wrap set to repeat.
  * Source: https://www.youtube.com/watch?v=Wz3nbQPYwss
@@ -11,18 +12,21 @@ using UnityEngine;
 
 public class Scroller : MonoBehaviour
 {
+    // Speed of scrolling.
     [SerializeField]
     [Range(-2f, 2f)]
     public float speed;
 
+    // Reference to background renderer
     [SerializeField]
     private Renderer bgRenderer;
 
+    // Determines the direction in which a given object is moved.
     [SerializeField]
     private Direction direction = Direction.Vertical;
     private Vector2 vectorDirection;
 
-    // Update is called once per frame
+    // Sets direction, and moves texture on given object.
     void Update()
     {
         setDirection();

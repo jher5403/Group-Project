@@ -24,12 +24,13 @@ public class SAM : MonoBehaviour
     [SerializeField]
     public Weapon weapon;
 
+    // Sound of projectile.
     [SerializeField]
     private AudioClip missileSound;
 
     /*
      * This is a coroutine. It is enabled at the start of the scene, and will randomly fire projectiles
-     * every couple of seconds.
+     * every 3-15 seconds.
      */
     private IEnumerator randomFire()
     {
@@ -41,16 +42,14 @@ public class SAM : MonoBehaviour
         }
     }
 
-    /*
-     * 
-     */
+    // Start coroutine
     private void Start()
     {
         StartCoroutine(randomFire());
     }
 
     /*
-     * I've adjusted the logic here. Once the player object is destroyed, all coroutines (really just one)
+     * Once the player object is destroyed, all coroutines (really just one)
      * are stopped. This means the SAM objects no longer fire.
      */
     void Update()

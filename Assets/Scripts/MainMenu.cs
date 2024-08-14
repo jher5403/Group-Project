@@ -28,9 +28,8 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     /*
-     *  Android applications require a specifc way to quit the application.
-     *  The code below is intended to move the application to the back if the activities.
-     *  Doesn't work currently.
+     *  Originally thought it was required to properly exit game in Android.
+     *  Turns out it isn't really necessary.
      */
     public static void MoveAndroidApplicationToBack()
     {

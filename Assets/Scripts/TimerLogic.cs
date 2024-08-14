@@ -17,17 +17,17 @@ public class TimerLogic : MonoBehaviour
 
     public GameOverManager gameOverManager;
 
-    // Update is called once per frame
+    // Timer logic.
     void Update()
     {
         if (remainingTime > 0)
         {
-            remainingTime -= Time.deltaTime;
+            remainingTime -= Time.deltaTime; // Deincrement every tick.
         } 
         else if (remainingTime <= 0)
         {
-            remainingTime = 0;
-            gameOverManager.GameWin();
+            remainingTime = 0; // Display 0 when timer is 0 or less.
+            gameOverManager.GameWin(); // Transition to win screen.
         }
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
