@@ -1,5 +1,5 @@
 /*
- * This script sets the boundary for a given object (intended for a player object) to the edges of the camera.
+ * This script sets the positional boundary for a given object at the edges of the camera.
  * Keep in mind, that the object might have some clipping issues when it reaches the edge of the screen.
  * Implement an offset if you want to deal with it.
  * 
@@ -13,16 +13,15 @@ using UnityEngine;
 
 public class BoundaryScript : MonoBehaviour
 {
-    private Vector2 screenBounds;
+    private Vector2 screenBounds; // Position of bounds
 
-    // Start is called before the first frame update
+    // Sets boundary of object to screen size.
     void Start()
     {
-        // Sets boundary of object to screen size.
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
-    // Update is called once per frame
+    // Updates position of game object.
     void LateUpdate()
     {
         Vector3 viewPos = transform.position;
